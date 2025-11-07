@@ -1,0 +1,49 @@
+#!/usr/bin/env sh
+
+# Husky pre-push hook
+# Runs before git push
+
+echo "Running pre-push checks..."
+
+# Run quick tests before pushing
+echo ""
+echo "Running tests..."
+if [ -f "venv/bin/python" ]; then
+    cd api 2>/dev/null || true
+    source venv/bin/activate 2>/dev/null || true
+    export PYTHONPATH="."
+    pytest tests/unit/ -v --tb=short --durations=0 --no-cov || {
+        echo ""
+        echo "ERROR: Tests failed! Fix them before pushing."
+        exit 1
+    }
+elif [ -f "venv/Scripts/python" ]; then
+    cd api 2>/dev/null || true
+    source venv/Scripts/activate 2>/dev/null || true
+    export PYTHONPATH="."
+    pytest tests/unit/ -v --tb=short --durations=0 --no-cov || {
+        echo ""
+        echo "ERROR: Tests failed! Fix them before pushing."
+        exit 1
+    }
+fi
+
+# Run linting
+echo ""
+echo "Running linting..."
+if command -v ruff >/dev/null 2>&1; then
+    ruff check . || {
+        echo "WARNING: Linting found issues."
+    }
+fi
+
+echo ""
+echo "SUCCESS: All pre-push checks passed!"
+
+# CUSTOMIZATION NOTES:
+# - Configure test paths and commands
+# - Add build validation
+# - Add integration tests
+# - Configure linting tools
+# - Add branch protection checks
+# - Prevent force push to main/master

@@ -1,0 +1,163 @@
+{
+  "env": {
+    "PROJECT_NAME": "AI Whisperers Standards",
+    "PROJECT_TYPE": "standardization-template",
+    "DOC_RATIO_CHECK": "enabled",
+    "TOON_FORMAT_VALIDATION": "enabled"
+  },
+  "permissions": {
+    "allow": [
+      "Bash(cd:*)",
+      "Bash(ls:*)",
+      "Bash(dir:*)",
+      "Bash(pwd:*)",
+      "Bash(cat:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(wc:*)",
+      "Bash(file:*)",
+      "Bash(du:*)",
+      "Bash(tree:*)",
+      "Bash(grep:*)",
+      "Bash(find:*)",
+      "Bash(diff:*)",
+      "Bash(echo:*)",
+      "Bash(mkdir:*)",
+      "Bash(touch:*)",
+      "Bash(cp:*)",
+      "Bash(mv:*)",
+      "Bash(git status:*)",
+      "Bash(git log:*)",
+      "Bash(git diff:*)",
+      "Bash(git show:*)",
+      "Bash(git branch:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(git pull:*)",
+      "Bash(git fetch:*)",
+      "Read(**/*.md)",
+      "Read(**/*.json)",
+      "Read(**/*.yml)",
+      "Read(**/*.yaml)",
+      "Read(**/*.py)",
+      "Read(**/*.js)",
+      "Read(**/*.ts)",
+      "Edit(**/*.md)",
+      "Edit(**/*.json)",
+      "Edit(automation-system-template/**/*)",
+      "Edit(documentation-template/**/*)",
+      "Write(automation-system-template/**/*)",
+      "Write(documentation-template/**/*)",
+      "SlashCommand(/validate-docs)",
+      "SlashCommand(/check-standards)",
+      "SlashCommand(/format-doc)"
+    ],
+    "deny": [
+      "Bash(rm -rf /:*)",
+      "Bash(rm -rf ~:*)",
+      "Bash(git push --force:*)",
+      "Bash(git push -f:*)",
+      "Bash(sudo:*)",
+      "Bash(su:*)",
+      "Edit(.git/**/*)",
+      "Write(.git/**/*)"
+    ],
+    "ask": [
+      "Edit(README.md)",
+      "Write(README.md)",
+      "Edit(automation-system-template/automation.md)",
+      "Edit(documentation-template/documentation-format.md)",
+      "Edit(documentation-template/neuroparsing-protocol.md)",
+      "Edit(documentation-template/proportion-in-docs.md)",
+      "Bash(git push origin main:*)",
+      "Bash(git push origin master:*)",
+      "Bash(rm -rf automation-system-template:*)",
+      "Bash(rm -rf documentation-template:*)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash(git commit:*)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '✓ Pre-commit: Validating documentation standards...'",
+            "timeout": 5000
+          }
+        ],
+        "_comment": "Validate docs before committing - extend with actual validation script when available"
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit(**/*.md)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '📝 Documentation modified. Consider: /validate-docs to check standards compliance'",
+            "timeout": 1000
+          }
+        ],
+        "_comment": "Remind to validate after editing documentation"
+      },
+      {
+        "matcher": "Write(**/*.md)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '📄 New documentation created. Use: /format-doc to apply AI Whisperers standards'",
+            "timeout": 1000
+          }
+        ],
+        "_comment": "Remind to format new documentation files"
+      },
+      {
+        "matcher": "Edit(automation-system-template/**/*)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '🔧 Template modified. Run: /check-standards to ensure consistency across templates'",
+            "timeout": 1000
+          }
+        ],
+        "_comment": "Check template consistency after modifications"
+      },
+      {
+        "matcher": "Edit(documentation-template/**/*)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '📚 Documentation template modified. Run: /check-standards to validate changes'",
+            "timeout": 1000
+          }
+        ],
+        "_comment": "Validate documentation template changes"
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '🧠 AI Whisperers Standards Repository | Session started | Ready to maintain standardization templates'",
+            "timeout": 5000
+          }
+        ],
+        "_comment": "Welcome message with project context"
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '👋 Session ended | Check for uncommitted changes: git status'",
+            "timeout": 5000
+          }
+        ]
+      }
+    ]
+  }
+}

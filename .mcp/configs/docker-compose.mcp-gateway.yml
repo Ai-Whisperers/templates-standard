@@ -1,0 +1,58 @@
+version: "3.8"
+
+services:
+  # MCP Gateway - Central hub for MCP protocol
+  mcp-gateway:
+    image: docker/mcp-gateway:latest
+    container_name: mcp-gateway-standards
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./.mcp/configs:/configs:ro
+    networks:
+      - mcp-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Filesystem MCP Server - Read project files
+  filesystem:
+    image: mcp/filesystem
+    container_name: mcp-filesystem-standards
+    volumes:
+      - .:/data:ro
+    environment:
+      - ALLOWED_PATHS=/data
+      - ALLOWED_EXTENSIONS=.md,.json,.yml,.yaml,.py,.js,.ts,.txt
+      - MAX_FILE_SIZE=10485760  # 10MB
+    networks:
+      - mcp-network
+    restart: unless-stopped
+
+  # Future: Custom Standards Validator Server
+  # Uncomment when implementation is ready
+  # standards-validator:
+  #   build:
+  #     context: .mcp/servers/standards-validator
+  #     dockerfile: Dockerfile
+  #   container_name: mcp-standards-validator
+  #   volumes:
+  #     - .:/workspace:ro
+  #   environment:
+  #     - PROJECT_TYPE=standardization-template
+  #     - VALIDATION_MODE=strict
+  #     - LOG_LEVEL=info
+  #   networks:
+  #     - mcp-network
+  #   restart: unless-stopped
+  #   depends_on:
+  #     - filesystem
+
+networks:
+  mcp-network:
+    driver: bridge
+    name: mcp-standards-network

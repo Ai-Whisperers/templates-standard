@@ -1,0 +1,187 @@
+# MCP Server Catalog for AI Whisperers Standards Repository
+# This file defines available MCP tools and their capabilities
+
+version: "1.0"
+catalog_name: "AI Whisperers Standards Validation"
+description: "MCP servers for validating documentation and templates against AI Whisperers standards"
+
+servers:
+  # Built-in Filesystem Server
+  - name: filesystem
+    type: built-in
+    image: mcp/filesystem
+    description: "Read and explore project files"
+    capabilities:
+      - read_files
+      - list_directories
+      - search_files
+    restrictions:
+      access_mode: read-only
+      allowed_paths:
+        - /data
+      allowed_extensions:
+        - .md
+        - .json
+        - .yml
+        - .yaml
+        - .py
+        - .js
+        - .ts
+        - .txt
+      max_file_size: 10485760  # 10MB
+
+  # Custom Standards Validator (Future)
+  # Uncomment when implemented
+  # - name: standards-validator
+  #   type: custom
+  #   build_context: .mcp/servers/standards-validator
+  #   description: "Validate documentation and templates against AI Whisperers standards"
+  #   capabilities:
+  #     - validate_documentation
+  #     - check_documentation_ratio
+  #     - validate_hierarchy
+  #     - check_template_consistency
+  #     - validate_toon_format
+  #     - analyze_cognitive_flow
+  #   configuration:
+  #     project_type: standardization-template
+  #     validation_mode: strict
+  #   dependencies:
+  #     - filesystem
+
+tools:
+  # Filesystem Tools
+  - name: read_file
+    server: filesystem
+    description: "Read contents of a file"
+    parameters:
+      - name: file_path
+        type: string
+        required: true
+        description: "Path to file relative to project root"
+    returns:
+      type: string
+      description: "File contents"
+
+  - name: list_directory
+    server: filesystem
+    description: "List files and folders in a directory"
+    parameters:
+      - name: directory_path
+        type: string
+        required: true
+        description: "Path to directory relative to project root"
+      - name: recursive
+        type: boolean
+        required: false
+        default: false
+        description: "List recursively"
+    returns:
+      type: array
+      description: "List of file and directory names"
+
+  - name: search_files
+    server: filesystem
+    description: "Search for files matching a pattern"
+    parameters:
+      - name: pattern
+        type: string
+        required: true
+        description: "Glob pattern to match files"
+      - name: content_search
+        type: string
+        required: false
+        description: "Search file contents for text"
+    returns:
+      type: array
+      description: "List of matching file paths"
+
+  # Standards Validator Tools (Future)
+  # Uncomment when implemented
+  # - name: validate_documentation
+  #   server: standards-validator
+  #   description: "Validate a documentation file against AI Whisperers standards"
+  #   parameters:
+  #     - name: file_path
+  #       type: string
+  #       required: true
+  #       description: "Path to markdown file"
+  #     - name: document_type
+  #       type: string
+  #       required: false
+  #       description: "Type of document (overview, guide, api, config, etc.)"
+  #     - name: strict_mode
+  #       type: boolean
+  #       required: false
+  #       default: true
+  #       description: "Enable strict validation"
+  #   returns:
+  #     type: object
+  #     description: "Validation report with passed/failed checks"
+  #     schema:
+  #       passed_checks: array
+  #       failed_checks: array
+  #       warnings: array
+  #       recommendations: array
+
+  # - name: check_documentation_ratio
+  #   server: standards-validator
+  #   description: "Analyze Human/Toon ratio in documentation"
+  #   parameters:
+  #     - name: file_path
+  #       type: string
+  #       required: true
+  #       description: "Path to markdown file"
+  #     - name: expected_type
+  #       type: string
+  #       required: false
+  #       description: "Expected document type for ratio comparison"
+  #   returns:
+  #     type: object
+  #     description: "Ratio analysis and compliance"
+  #     schema:
+  #       human_ratio: number
+  #       toon_ratio: number
+  #       expected_range: object
+  #       compliant: boolean
+  #       recommendations: array
+
+  # - name: validate_hierarchy
+  #   server: standards-validator
+  #   description: "Check heading hierarchy compliance (≤3 levels)"
+  #   parameters:
+  #     - name: file_path
+  #       type: string
+  #       required: true
+  #       description: "Path to markdown file"
+  #   returns:
+  #     type: object
+  #     description: "Hierarchy validation results"
+  #     schema:
+  #       valid: boolean
+  #       max_depth: number
+  #       violations: array
+  #       suggestions: array
+
+  # - name: check_template_consistency
+  #   server: standards-validator
+  #   description: "Compare templates across repository for consistency"
+  #   parameters:
+  #     - name: template_type
+  #       type: string
+  #       required: true
+  #       description: "Type of template to check (claude or mcp)"
+  #   returns:
+  #     type: object
+  #     description: "Consistency report"
+  #     schema:
+  #       templates_checked: array
+  #       inconsistencies: array
+  #       recommendations: array
+
+metadata:
+  author: "AI Whisperers"
+  version: "1.0.0"
+  updated: "2025-11-07"
+  repository: "template-standard"
+  documentation: ".mcp/README.md"

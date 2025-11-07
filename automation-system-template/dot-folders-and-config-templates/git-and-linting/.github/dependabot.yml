@@ -1,0 +1,72 @@
+version: 2
+updates:
+  # Python dependencies
+  - package-ecosystem: "pip"
+    directory: "/api"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "chore(deps-api)"
+      include: "scope"
+    labels:
+      - "dependencies"
+      - "python"
+      - "api"
+    open-pull-requests-limit: 2
+    groups:
+      security-updates:
+        patterns:
+          - "*"
+        applies-to: security-updates
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+
+  # JavaScript dependencies
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "chore(deps)"
+      include: "scope"
+    labels:
+      - "dependencies"
+      - "npm"
+    open-pull-requests-limit: 2
+    groups:
+      security-updates:
+        dependency-type: "production"
+        update-types:
+          - "patch"
+        patterns:
+          - "*"
+        applies-to: security-updates
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+
+  # GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    commit-message:
+      prefix: "chore(deps-actions)"
+      include: "scope"
+    labels:
+      - "dependencies"
+      - "github-actions"
+      - "ci/cd"
+    open-pull-requests-limit: 1
+    groups:
+      all-actions:
+        patterns:
+          - "*"
+
+# CUSTOMIZATION NOTES:
+# - Adjust directories based on your project structure
+# - Change update intervals (daily, weekly, monthly)
+# - Customize labels for better issue tracking
+# - Configure open-pull-requests-limit based on team capacity
+# - Add more ecosystems: docker, terraform, gradle, maven, etc.

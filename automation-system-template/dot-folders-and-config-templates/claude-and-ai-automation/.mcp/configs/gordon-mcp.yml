@@ -1,0 +1,35 @@
+# Docker AI (Gordon) MCP Configuration
+# Place this file in your project root as "gordon-mcp.yml"
+# Docker AI will automatically detect and load it
+
+version: "3.8"
+
+services:
+  # Filesystem server - Read project files
+  filesystem:
+    image: mcp/filesystem
+    volumes:
+      - .:/data:ro  # Read-only access to project directory
+    environment:
+      - ALLOWED_PATHS=/data
+      - ALLOWED_EXTENSIONS=.py,.js,.ts,.tsx,.jsx,.md,.json,.yml,.yaml,.toml,.txt
+      - MAX_FILE_SIZE=10MB
+
+  # Fetch server - HTTP requests
+  fetch:
+    image: mcp/fetch
+    environment:
+      - ALLOWED_HOSTS=localhost,127.0.0.1,api.openai.com
+      - TIMEOUT=30000
+      - MAX_REDIRECTS=5
+
+  # Time server - Time and date utilities
+  time:
+    image: mcp/time
+
+# CUSTOMIZATION NOTES:
+# - Update ALLOWED_EXTENSIONS with your file types
+# - Configure ALLOWED_HOSTS for external services
+# - Add custom MCP servers if needed
+# - Adjust MAX_FILE_SIZE based on your project
+# - Add environment variables for your services

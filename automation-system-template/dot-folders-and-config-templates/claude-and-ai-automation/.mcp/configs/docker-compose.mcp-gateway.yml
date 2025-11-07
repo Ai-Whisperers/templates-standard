@@ -1,0 +1,64 @@
+# MCP Gateway - Full-featured MCP server for multiple AI clients
+# Supports Claude Desktop, Cursor, VSCode, and more
+
+version: "3.8"
+
+services:
+  mcp-gateway:
+    image: docker/mcp-gateway:latest
+    container_name: mcp-gateway
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./configs:/configs:ro
+      - ..:/workspace:ro  # Project root
+    environment:
+      - MCP_CATALOG=/configs/mcp-catalog.yaml
+      - LOG_LEVEL=info
+      - ALLOWED_ORIGINS=*
+    restart: unless-stopped
+    networks:
+      - mcp-network
+
+  # Filesystem server
+  mcp-filesystem:
+    image: mcp/filesystem
+    volumes:
+      - ..:/data:ro
+    environment:
+      - ALLOWED_PATHS=/data
+      - ALLOWED_EXTENSIONS=.py,.js,.ts,.md,.json,.yml
+    networks:
+      - mcp-network
+
+  # Fetch server
+  mcp-fetch:
+    image: mcp/fetch
+    environment:
+      - ALLOWED_HOSTS=localhost,api.example.com
+      - TIMEOUT=30000
+    networks:
+      - mcp-network
+
+  # Time server
+  mcp-time:
+    image: mcp/time
+    networks:
+      - mcp-network
+
+networks:
+  mcp-network:
+    driver: bridge
+
+# CUSTOMIZATION NOTES:
+# - Update ALLOWED_ORIGINS for security
+# - Add custom MCP servers as needed
+# - Configure authentication (OAuth, API keys)
+# - Add health checks for reliability
+# - Configure logging and monitoring
+# - Add rate limiting if needed
+
+# Usage:
+# Start: docker-compose -f .mcp/configs/docker-compose.mcp-gateway.yml up -d
+# Stop:  docker-compose -f .mcp/configs/docker-compose.mcp-gateway.yml down
+# Logs:  docker-compose -f .mcp/configs/docker-compose.mcp-gateway.yml logs -f

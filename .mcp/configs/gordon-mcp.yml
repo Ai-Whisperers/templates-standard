@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  # Built-in filesystem server for reading project files
+  filesystem:
+    image: mcp/filesystem
+    volumes:
+      - .:/data:ro  # Read-only access to project
+    environment:
+      - ALLOWED_PATHS=/data
+      - ALLOWED_EXTENSIONS=.md,.json,.yml,.yaml,.py,.js,.ts,.txt
+    restart: unless-stopped
+
+  # Future: Custom standards validator
+  # Uncomment when server implementation is ready
+  # standards-validator:
+  #   build:
+  #     context: .mcp/servers/standards-validator
+  #     dockerfile: Dockerfile
+  #   volumes:
+  #     - .:/workspace:ro
+  #   environment:
+  #     - PROJECT_TYPE=standardization-template
+  #     - VALIDATION_MODE=strict
+  #   restart: unless-stopped

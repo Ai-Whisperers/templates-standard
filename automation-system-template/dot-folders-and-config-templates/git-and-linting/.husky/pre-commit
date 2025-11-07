@@ -1,0 +1,68 @@
+#!/usr/bin/env sh
+
+# Husky pre-commit hook
+# Runs before git commit
+
+echo "Running pre-commit checks..."
+
+# Run lint-staged to check and format staged files
+if command -v npx >/dev/null 2>&1; then
+    npx lint-staged
+fi
+
+# Python type checking (if Python files changed)
+python_files=$(git diff --cached --name-only --diff-filter=ACM | grep "\.py$" || true)
+if [ -n "$python_files" ]; then
+    echo ""
+    echo "Running Python type checks..."
+    if [ -f "venv/bin/python" ]; then
+        ./venv/bin/python -m mypy . --ignore-missing-imports --no-error-summary || {
+            echo "WARNING: Type checking found issues. Consider fixing them."
+        }
+    elif [ -f "venv/Scripts/python" ]; then
+        ./venv/Scripts/python -m mypy . --ignore-missing-imports --no-error-summary || {
+            echo "WARNING: Type checking found issues. Consider fixing them."
+        }
+    fi
+fi
+
+# Security scanning for Python files
+if [ -n "$python_files" ]; then
+    echo ""
+    echo "Running security scan..."
+    if command -v bandit >/dev/null 2>&1; then
+        bandit -r . -f screen -ll 2>/dev/null || {
+            echo "WARNING: Security scan found potential issues."
+        }
+    fi
+fi
+
+# Check for secrets in staged files
+echo ""
+echo "Checking for secrets..."
+non_doc_files=$(git diff --cached --name-only --diff-filter=ACM | grep -vE "\.(md|txt)$" || true)
+if [ -n "$non_doc_files" ]; then
+    if git diff --cached -- $non_doc_files | grep -iE "(sk-[a-zA-Z0-9]{32,}|password\s*=\s*['\"][^'\"]+|secret\s*=\s*['\"][^'\"]+|bearer\s+[a-zA-Z0-9_-]{20,})" >/dev/null 2>&1; then
+        echo "ERROR: Possible secret detected in code files!"
+        echo "Please remove sensitive data before committing."
+        exit 1
+    fi
+fi
+
+# Run project-specific validation
+echo ""
+echo "Running project validation..."
+if [ -f "scripts/development/check_repo_organization.sh" ]; then
+    bash scripts/development/check_repo_organization.sh
+fi
+
+echo ""
+echo "SUCCESS: All pre-commit checks passed!"
+
+# CUSTOMIZATION NOTES:
+# - Add your project-specific checks
+# - Configure tool paths for your environment
+# - Add linting, formatting, or testing commands
+# - Adjust paths for venv, scripts, etc.
+# - Add database migration checks
+# - Add documentation generation

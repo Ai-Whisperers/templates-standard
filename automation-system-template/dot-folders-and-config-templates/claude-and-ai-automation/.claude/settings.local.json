@@ -1,0 +1,194 @@
+{
+  "env": {
+    "PYTHONPATH": ".:./api",
+    "APP_ENV": "development",
+    "USE_FAKE_REDIS": "true"
+  },
+  "permissions": {
+    "allow": [
+      "Bash(cd:*)",
+      "Bash(ls:*)",
+      "Bash(dir:*)",
+      "Bash(pwd:*)",
+      "Bash(mkdir:*)",
+      "Bash(rmdir:*)",
+      "Bash(rm:*)",
+      "Bash(mv:*)",
+      "Bash(cp:*)",
+      "Bash(copy:*)",
+      "Bash(touch:*)",
+      "Bash(cat:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(wc:*)",
+      "Bash(file:*)",
+      "Bash(du:*)",
+      "Bash(tree:*)",
+      "Bash(awk:*)",
+      "Bash(sed:*)",
+      "Bash(grep:*)",
+      "Bash(find:*)",
+      "Bash(timeout 5 find:*)",
+      "Bash(timeout 10 find:*)",
+      "Bash(diff:*)",
+      "Bash(md5sum:*)",
+      "Bash(echo:*)",
+      "Bash(test:*)",
+      "Bash(for:*)",
+      "Bash(if:*)",
+      "Bash(then:*)",
+      "Bash(else:*)",
+      "Bash(fi:*)",
+      "Bash(do:*)",
+      "Bash(done:*)",
+      "Bash(chmod:*)",
+      "Bash(sleep:*)",
+      "Bash(curl:*)",
+      "Bash(where:*)",
+      "Bash(which:*)",
+      "Bash(python:*)",
+      "Bash(./venv/Scripts/python:*)",
+      "Bash(./venv/bin/python:*)",
+      "Bash(timeout 60 ./venv/Scripts/python:*)",
+      "Bash(timeout 120 ./venv/Scripts/python:*)",
+      "Bash(bash:*)",
+      "Bash(bash scripts/:*)",
+      "Bash(git status:*)",
+      "Bash(git log:*)",
+      "Bash(git diff:*)",
+      "Bash(git show:*)",
+      "Bash(git branch:*)",
+      "Bash(git checkout:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(git pull:*)",
+      "Bash(git fetch:*)",
+      "Bash(docker:*)",
+      "Bash(docker-compose:*)",
+      "Bash(npm:*)",
+      "Bash(npx:*)",
+      "Bash(node:*)",
+      "Bash(pip list:*)",
+      "Bash(pip show:*)",
+      "Bash(pip freeze:*)",
+      "Bash(unzip:*)",
+      "Bash(tar:*)",
+      "Bash(gh:*)",
+      "Bash(wsl:*)",
+      "Bash(cmd:*)",
+      "Bash(powershell -Command:*)",
+      "Bash(timeout:*)",
+      "SlashCommand(/run-tests)",
+      "SlashCommand(/test:*)"
+    ],
+    "deny": [
+      "Read(.env)",
+      "Read(.env.*)",
+      "Read(**/credentials.json)",
+      "Read(**/.aws/credentials)",
+      "Read(**/.ssh/id_*)",
+      "Read(**/id_rsa*)",
+      "Edit(.env)",
+      "Edit(.env.*)",
+      "Write(.env)",
+      "Write(.env.*)",
+      "Bash(rm -rf /:*)",
+      "Bash(rm -rf ~:*)",
+      "Bash(git push --force:*)",
+      "Bash(git push -f:*)",
+      "Bash(docker system prune -a:*)",
+      "Bash(docker rm -f:*)",
+      "Bash(killall:*)",
+      "Bash(pkill:*)",
+      "Bash(sudo:*)",
+      "Bash(su:*)"
+    ],
+    "ask": [
+      "Bash(pip install:*)",
+      "Bash(npm install:*)",
+      "Bash(git push origin main:*)",
+      "Bash(git reset --hard:*)",
+      "Bash(docker-compose down -v:*)",
+      "Bash(docker-compose build:*)",
+      "Bash(rm -rf api/:*)",
+      "Bash(rm -rf docs:*)",
+      "Bash(rm -rf node_modules:*)",
+      "Bash(git rebase:*)",
+      "Bash(git merge main:*)",
+      "Bash(docker system prune:*)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash(git commit:*)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash scripts/development/check_repo_organization.sh",
+            "timeout": 30000
+          }
+        ],
+        "_comment": "CUSTOMIZE: Replace with your pre-commit validation script"
+      },
+      {
+        "matcher": "Bash(git push:*)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'Pre-push: Ensure all tests pass before pushing'",
+            "timeout": 5000
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write(*.py)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'Python file created. Consider: /run-tests'",
+            "timeout": 1000
+          }
+        ],
+        "_comment": "CUSTOMIZE: Replace with your testing command"
+      },
+      {
+        "matcher": "Edit(*.py)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'Python file modified. Verify with: /run-tests'",
+            "timeout": 1000
+          }
+        ],
+        "_comment": "CUSTOMIZE: Replace with your testing command"
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'PROJECT_NAME | Session started | Branch: BRANCH_NAME | Context: CLAUDE.md'",
+            "timeout": 5000
+          }
+        ],
+        "_comment": "CUSTOMIZE: Replace PROJECT_NAME and BRANCH_NAME"
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'Session ended | Outstanding changes? Run: git status'",
+            "timeout": 5000
+          }
+        ]
+      }
+    ]
+  }
+}

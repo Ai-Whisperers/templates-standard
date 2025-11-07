@@ -1,0 +1,41 @@
+# MCP Catalog - Registry of available MCP tools
+# Used by MCP Gateway to discover and route to servers
+
+catalog:
+  version: "1.0"
+  servers:
+    - name: filesystem
+      description: "Read project files and directories"
+      image: mcp/filesystem
+      capabilities:
+        - read_file
+        - list_directory
+        - search_files
+      environment:
+        - ALLOWED_PATHS=/data
+        - ALLOWED_EXTENSIONS=.py,.js,.ts,.md,.json,.yml
+
+    - name: fetch
+      description: "Make HTTP requests to APIs and services"
+      image: mcp/fetch
+      capabilities:
+        - http_get
+        - http_post
+        - http_request
+      environment:
+        - ALLOWED_HOSTS=localhost,api.example.com
+        - TIMEOUT=30000
+
+    - name: time
+      description: "Time and date utilities"
+      image: mcp/time
+      capabilities:
+        - get_timestamp
+        - format_time
+        - calculate_duration
+
+# CUSTOMIZATION NOTES:
+# - Add your custom MCP servers to the catalog
+# - Document capabilities for each server
+# - Update environment variables
+# - Add version constraints if needed
