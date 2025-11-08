@@ -1,0 +1,53 @@
+# MDC Rule: C# XML Documentation for Code Files
+
+## Purpose
+This rule defines the standards for adding comprehensive XML documentation to C# code files. It ensures clarity, maintainability, and consistency across all code files, with a focus on C# XML documentation comments. **No code logic or structure should be changed as part of this rule—only comments/documentation.**
+
+## Requirements
+
+### 1. Class-Level Documentation
+- Add XML documentation comments for each class, struct, interface, enum, and delegate.
+  - Purpose and functionality
+  - Inheritance relationships
+  - Important implementation details
+  - Usage examples if relevant
+
+### 2. Member Documentation
+- Add XML documentation for all members:
+  - Fields (public, protected, and private if they represent important state)
+  - Properties
+  - Constructors
+  - Methods
+  - Events
+  - Indexers
+  - Operators
+
+### 3. Member Documentation Details
+- For each member, include:
+  - Summary of purpose
+  - Parameters with descriptions (`<param>`)
+  - Return values (`<returns>`)
+  - Exceptions that may be thrown (`<exception>`)
+  - Remarks for special behaviors (`<remarks>`)
+  - Examples if the usage is complex (`<example>`)
+
+### 4. Special Attention
+- Pay special attention to:
+  - Public API members
+  - Protected members that are part of the inheritance interface
+  - Private members that represent important state
+  - Implementation of interfaces
+  - Overridden members
+
+### 5. XML Documentation Standards
+- Documentation must follow C# XML documentation standards:
+  - Use proper XML tags (`<summary>`, `<param>`, `<returns>`, `<exception>`, `<remarks>`, `<example>`, etc.)
+  - Be clear and concise
+  - Include all necessary information for IntelliSense
+  - Follow consistent formatting
+
+### 6. Documentation-Only Changes
+- **Do not adjust or modify any code logic, structure, or behavior as part of this rule. Only comments/documentation (XML comments) should be added or updated.**
+
+### 7. Completeness and Accuracy
+- Ensure the documentation is complete, accurate, and follows best practices for C# XML documentation. 

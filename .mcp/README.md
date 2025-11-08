@@ -22,7 +22,7 @@ MCP standardizes how AI applications interact with external tools and data sourc
 **Docker AI (Gordon) - Simplest:**
 ```bash
 docker pull mcp/filesystem && docker pull mcp/fetch
-docker ai "List all markdown files in documentation-template/"
+docker ai "List all markdown files in documentation-standard/"
 docker ai "Validate the main README.md structure"
 ```
 
@@ -112,8 +112,8 @@ networks:
 
 **Docker AI** (auto-detects `gordon-mcp.yml`):
 ```bash
-docker ai "Validate all documentation in documentation-template/"
-docker ai "Check template consistency across automation-system-template/"
+docker ai "Validate all documentation in documentation-standard/"
+docker ai "Check template consistency across automation-practical-guide/"
 docker ai "Analyze documentation ratio in README.md"
 ```
 
@@ -154,7 +154,7 @@ standards-validator/
 # → Human/Toon ratio analysis + recommendations
 
 # check_template_consistency
-{"template_path": "automation-system-template/dot-folders/"}
+{"template_path": "john-ivan-config-templates/"}
 # → consistency report across templates
 ```
 

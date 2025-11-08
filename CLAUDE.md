@@ -18,28 +18,38 @@ This repository contains standardization templates and documentation for AI Whis
 
 ```
 template-standard/
-├── README.md                       # Main standards overview
-├── CLAUDE.md                       # This file - project context
-├── documentation-template/         # Documentation standards
-│   ├── documentation-format.md     # Human + Toon dual-layer format
-│   ├── neuroparsing-protocol.md    # Cognitive neuroscience principles
-│   └── proportion-in-docs.md       # Human/Toon ratio guidelines
-├── automation-system-template/     # Automation and AI integration
-│   ├── automation.md               # .mcp and .claude orchestration
-│   ├── integration-system.md       # Testing stratification layers
-│   ├── testing-stratification-layers/  # AI/Bot/Code quality layers
-│   ├── k8s-deployment-template/       # Kubernetes deployment templates
-│   └── configuration-templates/
-│       ├── ai-assistant-configuration/  # .claude & .mcp templates
-│       ├── git-and-linting/             # .github workflows
-│       └── vscode-devcontainer/         # .devcontainer config
-├── .claude/                        # This repo's Claude config
+├── README.md                          # Main standards overview
+├── CLAUDE.md                          # This file - project context
+├── documentation-standard/            # Documentation format standards
+│   ├── documentation-format.md        # Human + Toon dual-layer format
+│   ├── neuroparsing-protocol.md       # Cognitive neuroscience principles
+│   └── proportion-in-docs.md          # Human/Toon ratio guidelines
+├── automation-practical-guide/        # Automation and AI integration
+│   ├── automation.md                  # .mcp and .claude orchestration
+│   ├── integration-system.md          # Testing stratification layers
+│   ├── mcp-dual-layering.md           # MCP architecture patterns
+│   ├── agnostic-datasets-pipelines.md # Data pipeline standards
+│   ├── reality-check.md               # Practical constraints
+│   └── abstraction-layers/
+│       └── ai-validation-layer/       # AI validation examples
+├── deploy&self-hosting-guide/         # Deployment and infrastructure
+│   ├── microservices/
+│   │   ├── k8s-deployment-template/   # Kubernetes deployment templates
+│   │   └── diagram.md                 # Architecture diagrams
+│   └── self-hosting/
+│       ├── budget/                    # Cost analysis and budgets
+│       └── reality-check.md           # Deployment considerations
+├── john-ivan-config-templates/        # Development workflow templates
+│   └── john-dev-template/             # Coding standards and rules
+├── research&exploratory/              # Research and future plans
+│   └── long-term-full-automation/     # Automation vision
+├── .claude/                           # This repo's Claude config
 │   ├── README.md  ├── settings.local.json
 │   └── commands/  # validate-docs, check-standards, format-doc
-└── .mcp/                           # This repo's MCP config
+└── .mcp/                              # This repo's MCP config
     ├── README.md  ├── QUICKSTART.md  ├── SETUP.md  ├── ARCHITECTURE.md
     ├── configs/   # gordon-mcp.yml, docker-compose.mcp-gateway.yml, mcp-catalog.yaml
-    └── servers/standards-validator/  # Custom validation server (planned)
+    └── servers/standards-validator/   # Custom validation server
 ```
 
 ---
@@ -131,7 +141,7 @@ template-standard/
 
 ### Editing Documentation
 
-**Before:** Read existing standards (documentation-template/), understand Human/Toon ratio, check cognitive principles
+**Before:** Read existing standards (documentation-standard/), understand Human/Toon ratio, check cognitive principles
 
 **During:** Maintain hierarchy (≤3 levels), add metadata line, use section separators, apply temporal flow markers
 
@@ -229,9 +239,11 @@ template-standard/
 
 **Internal:**
 - [Main README](README.md) - Standards overview
-- [Documentation Format](documentation-template/documentation-format.md)
-- [Neuroparsing Protocol](documentation-template/neuroparsing-protocol.md)
-- [Automation System](automation-system-template/automation.md)
+- [Documentation Format](documentation-standard/documentation-format.md)
+- [Neuroparsing Protocol](documentation-standard/neuroparsing-protocol.md)
+- [Automation System](automation-practical-guide/automation.md)
+- [Integration System](automation-practical-guide/integration-system.md)
+- [K8s Deployment Guide](deploy&self-hosting-guide/microservices/k8s-deployment-template/README.md)
 - [.claude README](.claude/README.md)
 - [.mcp README](.mcp/README.md)
 

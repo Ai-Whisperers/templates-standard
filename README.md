@@ -48,7 +48,47 @@ Every byte stays structure-aware; every service composable; performance is the b
 
 ---
 
-## 📘 DOCUMENTATION STANDARD (`/docs`)
+## 📁 REPOSITORY STRUCTURE
+
+```
+template-standard/
+├── README.md                          # This file - standards overview
+├── CLAUDE.md                          # Project context for AI assistants
+├── documentation-standard/            # Documentation format standards
+│   ├── documentation-format.md        # Human + Toon dual-layer format
+│   ├── neuroparsing-protocol.md       # Cognitive neuroscience principles
+│   └── proportion-in-docs.md          # Human/Toon ratio guidelines
+├── automation-practical-guide/        # Automation and AI integration
+│   ├── automation.md                  # .mcp and .claude orchestration
+│   ├── integration-system.md          # Testing stratification layers
+│   ├── mcp-dual-layering.md           # MCP architecture patterns
+│   ├── agnostic-datasets-pipelines.md # Data pipeline standards
+│   ├── reality-check.md               # Practical constraints
+│   └── abstraction-layers/
+│       └── ai-validation-layer/       # AI validation examples
+├── deploy&self-hosting-guide/         # Deployment and infrastructure
+│   ├── microservices/
+│   │   ├── k8s-deployment-template/   # Kubernetes deployment templates
+│   │   └── diagram.md                 # Architecture diagrams
+│   └── self-hosting/
+│       ├── budget/                    # Cost analysis and budgets
+│       └── reality-check.md           # Deployment considerations
+├── john-ivan-config-templates/        # Development workflow templates
+│   └── john-dev-template/             # Coding standards and rules
+├── research&exploratory/              # Research and future plans
+│   └── long-term-full-automation/     # Automation vision
+├── .claude/                           # Claude Code configuration
+│   ├── README.md  ├── settings.local.json
+│   └── commands/  # validate-docs, check-standards, format-doc
+└── .mcp/                              # Model Context Protocol config
+    ├── README.md  ├── QUICKSTART.md  ├── SETUP.md  ├── ARCHITECTURE.md
+    ├── configs/   # gordon-mcp.yml, docker-compose.mcp-gateway.yml
+    └── servers/standards-validator/   # Custom validation server
+```
+
+---
+
+## 📘 DOCUMENTATION STANDARD
 
 > *Write so both humans and models can breathe.*
 

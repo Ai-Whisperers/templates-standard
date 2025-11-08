@@ -171,7 +171,7 @@ See `.mcp/README.md` for MCP server setup and capabilities.
 
 This configuration is tailored for the standards repository. When using these templates in other projects:
 
-1. Copy template structure from `automation-system-template/configuration-templates/`
+1. Copy template structure from `john-ivan-config-templates/` or `automation-practical-guide/`
 2. Customize for specific project context
 3. Maintain minimal variation (as per automation.md principle)
 4. Keep sufficient context without drift

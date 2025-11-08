@@ -1,0 +1,66 @@
+---
+description: 
+globs: *Tests.cs
+alwaysApply: false
+---
+# MDC Rule: Unit Test Documentation
+
+## Purpose
+This rule defines the standards for documenting unit tests in the codebase. It ensures clarity, maintainability, and consistency across all test files, with a focus on XML documentation and meaningful inline comments. **No code logic or structure should be changed as part of this rule—only documentation.**
+
+## Requirements
+
+### 1. Test Class Documentation
+- Add XML documentation comments for each test class.
+  - Explain the purpose of the class and its role in the testing pipeline.
+  - Describe the relationship between any base and additional components (e.g., compressors).
+  - State the expected behavior when components are stacked or combined.
+
+### 2. Test Method Documentation
+- Add detailed XML documentation for each test method, including:
+  - A clear description of what is being tested.
+  - The expected behavior and its importance.
+  - Any specific edge cases or scenarios covered.
+  - The mathematical or logical reasoning behind the expected results.
+
+### 3. Test Categories and Traits
+- Use `[Trait]` or equivalent attributes to group related tests:
+  - Basic functionality
+  - Edge cases
+  - NaN handling
+  - Performance-related tests
+
+### 4. Inline Comments
+- Include inline comments within test methods to explain:
+  - The setup/arrangement phase
+  - The specific operations being performed
+  - The verification steps
+  - Any assumptions made in the test
+
+### 5. Mock Class Documentation
+- Add XML documentation for any mock or stub classes used in tests:
+  - State their purpose in testing
+  - Describe the mock behavior implemented
+  - Explain how they simulate real component behavior
+
+### 6. Edge Cases and Error Conditions
+- Consider and document test cases for:
+  - Error conditions and exception handling
+  - Boundary conditions
+  - Different combinations of component behaviors
+  - Memory and performance considerations
+
+### 7. Examples
+- Include examples in the documentation showing:
+  - Typical usage patterns
+  - Common scenarios
+  - Expected input/output relationships
+
+### 8. Cross-References
+- Add cross-references to related test classes and documentation where appropriate.
+
+### 9. Documentation-Only Changes
+- **Do not adjust or modify any code logic, structure, or behavior as part of this rule. Only documentation (XML comments, inline comments, and attributes) should be added or updated.**
+
+### 10. Consistency
+- All documentation must follow the standard XML documentation format and maintain consistency with the existing codebase documentation style. 

@@ -1,0 +1,37 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# README Structure Rule
+
+## Purpose
+Ensure all agents and subprojects have a consistent, high-quality README.md for onboarding, usage, and maintenance.
+
+---
+
+## Required README.md Structure
+1. Title and (optional) Awesome badge
+2. Logo (if available)
+3. Short description
+4. "Why .cursorrules?" or project purpose section
+5. Table of Contents
+6. Rules or Features section (with categories if relevant)
+7. How to Use section (setup, quick start, usage)
+8. Contributing section (how to contribute, code standards, rule references)
+9. License section
+
+---
+
+## Update & Maintenance
+- README.md must be updated when adding new rules, features, or categories.
+- Table of Contents and links must remain accurate and relative.
+- When adding new categories, update both the ToC and Rules/Features sections.
+- Use clear, concise language and practical examples.
+
+---
+
+## Enforcement
+- Meta-agent or reviewers should check for README compliance on PRs and new agent creation.
+- Non-compliant READMEs should be flagged for revision before merge.
+
