@@ -1,0 +1,130 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: multi-service
+  labels:
+    app: frontend
+    tier: frontend
+    version: v1.0.0
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+        tier: frontend
+        version: v1.0.0
+    spec:
+      containers:
+      - name: frontend
+        image: ${FRONTEND_IMAGE_NAME}:${FRONTEND_IMAGE_TAG}
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8000
+          name: http
+          protocol: TCP
+        - containerPort: 8815
+          name: grpc
+          protocol: TCP
+        env:
+        - name: APP_ENV
+          valueFrom:
+            configMapKeyRef:
+              name: multi-service-config
+              key: APP_ENV
+        - name: LOG_LEVEL
+          valueFrom:
+            configMapKeyRef:
+              name: multi-service-config
+              key: LOG_LEVEL
+        - name: BACKEND_URL
+          valueFrom:
+            configMapKeyRef:
+              name: multi-service-config
+              key: BACKEND_URL
+        - name: TIMEOUT
+          valueFrom:
+            configMapKeyRef:
+              name: multi-service-config
+              key: FRONTEND_TIMEOUT
+        - name: PORT
+          value: "8000"
+        - name: GRPC_PORT
+          value: "8815"
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "500m"
+          limits:
+            memory: "2Gi"
+            cpu: "2000m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 30
+          periodSeconds: 30
+          timeoutSeconds: 10
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 20
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+
+---
+# Internal ClusterIP service
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-internal
+  namespace: multi-service
+  labels:
+    app: frontend
+    tier: frontend
+spec:
+  type: ClusterIP
+  ports:
+  - port: 8000
+    targetPort: 8000
+    protocol: TCP
+    name: http
+  - port: 8815
+    targetPort: 8815
+    protocol: TCP
+    name: grpc
+  selector:
+    app: frontend
+
+---
+# External NodePort service
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-external
+  namespace: multi-service
+  labels:
+    app: frontend
+    tier: frontend
+spec:
+  type: NodePort
+  ports:
+  - port: 8000
+    targetPort: 8000
+    nodePort: 30800
+    protocol: TCP
+    name: http
+  - port: 8815
+    targetPort: 8815
+    nodePort: 30815
+    protocol: TCP
+    name: grpc
+  selector:
+    app: frontend

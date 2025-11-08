@@ -1,0 +1,39 @@
+---
+# ClusterIP Service (internal)
+apiVersion: v1
+kind: Service
+metadata:
+  name: ${APP_NAME}-internal
+  namespace: ${NAMESPACE}
+  labels:
+    app: ${APP_NAME}
+spec:
+  type: ClusterIP
+  ports:
+  - port: ${SERVICE_PORT}
+    targetPort: ${CONTAINER_PORT}
+    protocol: TCP
+    name: http
+  selector:
+    app: ${APP_NAME}
+
+---
+# NodePort Service (external access)
+# Comment out if using Ingress instead
+apiVersion: v1
+kind: Service
+metadata:
+  name: ${APP_NAME}-external
+  namespace: ${NAMESPACE}
+  labels:
+    app: ${APP_NAME}
+spec:
+  type: NodePort
+  ports:
+  - port: ${SERVICE_PORT}
+    targetPort: ${CONTAINER_PORT}
+    nodePort: ${NODE_PORT}
+    protocol: TCP
+    name: http
+  selector:
+    app: ${APP_NAME}

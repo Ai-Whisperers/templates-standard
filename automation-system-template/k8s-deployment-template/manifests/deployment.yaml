@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ${APP_NAME}
+  namespace: ${NAMESPACE}
+  labels:
+    app: ${APP_NAME}
+    version: ${VERSION}
+spec:
+  replicas: ${REPLICAS}
+  selector:
+    matchLabels:
+      app: ${APP_NAME}
+  template:
+    metadata:
+      labels:
+        app: ${APP_NAME}
+        version: ${VERSION}
+    spec:
+      containers:
+      - name: ${CONTAINER_NAME}
+        image: ${IMAGE_NAME}:${IMAGE_TAG}
+        imagePullPolicy: ${IMAGE_PULL_POLICY}
+        ports:
+        - containerPort: ${CONTAINER_PORT}
+          name: http
+          protocol: TCP
+        env:
+        - name: APP_ENV
+          valueFrom:
+            configMapKeyRef:
+              name: ${APP_NAME}-config
+              key: APP_ENV
+              optional: true
+        # Add additional environment variables from ConfigMap as needed
+        resources:
+          requests:
+            memory: "${MEMORY_REQUEST}"
+            cpu: "${CPU_REQUEST}"
+          limits:
+            memory: "${MEMORY_LIMIT}"
+            cpu: "${CPU_LIMIT}"
+        # Health checks - customize paths as needed
+        livenessProbe:
+          httpGet:
+            path: ${LIVENESS_PATH}
+            port: ${CONTAINER_PORT}
+          initialDelaySeconds: ${LIVENESS_INITIAL_DELAY}
+          periodSeconds: 30
+          timeoutSeconds: 10
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: ${READINESS_PATH}
+            port: ${CONTAINER_PORT}
+          initialDelaySeconds: ${READINESS_INITIAL_DELAY}
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+      # Uncomment if using private registry
+      # imagePullSecrets:
+      # - name: ${REGISTRY_SECRET}
