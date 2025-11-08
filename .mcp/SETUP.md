@@ -185,7 +185,7 @@ docker ai "Does the main README have the required metadata line?"
 
 ```bash
 docker ai "What are the differences between .claude folders in different templates?"
-docker ai "List all files in automation-system-template/dot-folders-and-config-templates/.claude/"
+docker ai "List all files in automation-system-template/configuration-templates/ai-assistant-configuration/.claude/"
 docker ai "Are the .mcp README files consistent across templates?"
 ```
 

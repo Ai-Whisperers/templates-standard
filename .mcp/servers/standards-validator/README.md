@@ -154,7 +154,7 @@ Compares templates across repository.
 ```json
 {
   "templates_checked": [
-    "automation-system-template/dot-folders-and-config-templates/claude-and-ai-automation/.claude",
+    "automation-system-template/configuration-templates/ai-assistant-configuration/.claude",
     ".claude"
   ],
   "inconsistencies": [

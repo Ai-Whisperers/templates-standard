@@ -39,7 +39,7 @@ Ensure consistency across all template folders and validate that examples match 
 
 ## Validation Steps
 
-1. Scan `automation-system-template/dot-folders-and-config-templates/`
+1. Scan `automation-system-template/configuration-templates/`
 2. Compare .claude and .mcp structures
 3. Verify against documentation-template/ specs
 4. Check main README.md references

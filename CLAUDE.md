@@ -27,11 +27,12 @@ template-standard/
 ├── automation-system-template/     # Automation and AI integration
 │   ├── automation.md               # .mcp and .claude orchestration
 │   ├── integration-system.md       # Testing stratification layers
-│   ├── ai-layer/                   # AI layer explanations
-│   └── dot-folders-and-config-templates/
-│       ├── claude-and-ai-automation/  # .claude & .mcp templates
-│       ├── git-and-linting/           # .github workflows
-│       └── vs-code dev container/     # .devcontainer config
+│   ├── testing-stratification-layers/  # AI/Bot/Code quality layers
+│   ├── k8s-deployment-template/       # Kubernetes deployment templates
+│   └── configuration-templates/
+│       ├── ai-assistant-configuration/  # .claude & .mcp templates
+│       ├── git-and-linting/             # .github workflows
+│       └── vscode-devcontainer/         # .devcontainer config
 ├── .claude/                        # This repo's Claude config
 │   ├── README.md  ├── settings.local.json
 │   └── commands/  # validate-docs, check-standards, format-doc
