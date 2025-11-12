@@ -1,0 +1,149 @@
+{
+  "graph": {
+    "nodes": [
+      {
+        "id": "data_network_effects",
+        "label": "Data Network Effects",
+        "definition": "User activity continuously improves the product’s performance, creating a self-reinforcing advantage via accumulated data."
+      },
+      {
+        "id": "algorithmic_opacity",
+        "label": "Algorithmic Opacity",
+        "definition": "Vendors obscure the inner workings of algorithms to prevent replication, audit, or substitution."
+      },
+      {
+        "id": "information_asymmetry",
+        "label": "Information Asymmetry",
+        "definition": "Vendors selectively reveal or manipulate performance and telemetry metrics to control narratives or regulation."
+      },
+      {
+        "id": "ecosystem_envelopment",
+        "label": "Ecosystem Envelopment",
+        "definition": "Absorbing adjacent services and tools into a unified platform to control complementary layers of the value chain."
+      },
+      {
+        "id": "strategic_interoperability",
+        "label": "Strategic Interoperability",
+        "definition": "Allowing partial interoperability—enough to attract users but insufficient for full substitution."
+      },
+      {
+        "id": "ecosystem_gravity",
+        "label": "Ecosystem Gravity",
+        "definition": "Network effects reinforced by social identity and shared assets, turning participation into dependency."
+      },
+      {
+        "id": "standard_capture",
+        "label": "Standard Capture",
+        "definition": "Dominating standards bodies to steer 'open' protocols in ways that favor proprietary implementations."
+      },
+      {
+        "id": "continuous_integration_drift",
+        "label": "Continuous Integration Drift",
+        "definition": "Frequent, incremental API or service updates that gradually erode third-party compatibility."
+      },
+      {
+        "id": "loss_leader_infrastructure",
+        "label": "Loss-Leader Infrastructure",
+        "definition": "Offering below-cost infrastructure or compute to onboard workloads and lock in market share."
+      },
+      {
+        "id": "regulatory_arbitrage",
+        "label": "Regulatory Arbitrage",
+        "definition": "Exploiting gaps between legal jurisdictions or slow-moving regulators to operate ahead of compliance."
+      }
+    ],
+    "edges": [
+      {
+        "source": "data_network_effects",
+        "target": "algorithmic_opacity",
+        "weight": 0.9,
+        "relation": "Data accumulation increases the feasibility and incentive to hide algorithms."
+      },
+      {
+        "source": "algorithmic_opacity",
+        "target": "information_asymmetry",
+        "weight": 0.8,
+        "relation": "Opacity directly drives asymmetry by controlling what is observable."
+      },
+      {
+        "source": "information_asymmetry",
+        "target": "ecosystem_envelopment",
+        "weight": 0.6,
+        "relation": "Control of information allows strategic expansion and acquisition without market alarm."
+      },
+      {
+        "source": "ecosystem_envelopment",
+        "target": "strategic_interoperability",
+        "weight": 0.7,
+        "relation": "Once vertical integration is achieved, partial interoperability maximizes capture."
+      },
+      {
+        "source": "strategic_interoperability",
+        "target": "ecosystem_gravity",
+        "weight": 0.8,
+        "relation": "Partial openness builds user momentum and cross-platform dependency."
+      },
+      {
+        "source": "ecosystem_envelopment",
+        "target": "standard_capture",
+        "weight": 0.7,
+        "relation": "Control over multiple stack layers grants leverage in standards-setting bodies."
+      },
+      {
+        "source": "standard_capture",
+        "target": "continuous_integration_drift",
+        "weight": 0.6,
+        "relation": "Captured standards enable version drift under the guise of compliance."
+      },
+      {
+        "source": "continuous_integration_drift",
+        "target": "ecosystem_envelopment",
+        "weight": 0.5,
+        "relation": "Compatibility friction pushes users deeper into the vendor ecosystem."
+      },
+      {
+        "source": "loss_leader_infrastructure",
+        "target": "ecosystem_envelopment",
+        "weight": 0.7,
+        "relation": "Subsidized infrastructure attracts new workloads that feed envelopment."
+      },
+      {
+        "source": "loss_leader_infrastructure",
+        "target": "regulatory_arbitrage",
+        "weight": 0.8,
+        "relation": "Aggressive pricing exploits timing gaps before antitrust or subsidy regulations adapt."
+      },
+      {
+        "source": "ecosystem_gravity",
+        "target": "standard_capture",
+        "weight": 0.4,
+        "relation": "Social and economic dominance legitimizes influence over standards."
+      },
+      {
+        "source": "algorithmic_opacity",
+        "target": "standard_capture",
+        "weight": 0.5,
+        "relation": "Opaque algorithms make it harder for open standards to compete on clarity."
+      },
+      {
+        "source": "information_asymmetry",
+        "target": "regulatory_arbitrage",
+        "weight": 0.6,
+        "relation": "Withholding key data delays regulatory detection or enforcement."
+      },
+      {
+        "source": "regulatory_arbitrage",
+        "target": "loss_leader_infrastructure",
+        "weight": 0.5,
+        "relation": "Legal flexibility enables risk-taking in pricing or market expansion."
+      }
+    ]
+  },
+  "metadata": {
+    "version": "1.0",
+    "weight_scale": "0.0-1.0",
+    "description": "Interdependency map of modern competitive strategies showing directional causality and relative influence strength.",
+    "author": "AI Whisperers Strategic Systems Analysis Unit",
+    "last_updated": "2025-11-12"
+  }
+}

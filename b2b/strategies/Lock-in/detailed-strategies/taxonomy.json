@@ -1,0 +1,94 @@
+{
+  "axes": {
+    "Economic": {
+      "description": "Strategies that manipulate cost structures, market incentives, or economic asymmetries to entrench dominance.",
+      "strategies": [
+        {
+          "name": "Data Network Effects",
+          "definition": "A feedback loop where user activity improves the system’s intelligence, making the platform increasingly indispensable.",
+          "mechanism": "Usage → data accumulation → improved performance → more usage.",
+          "examples": ["Google Search", "Amazon Recommendations", "Tesla Autopilot"],
+          "strategic_class": "Dynamic capabilities / learning economies"
+        },
+        {
+          "name": "Loss-Leader Infrastructure",
+          "definition": "Offering core infrastructure or compute below cost to absorb workloads and later monetize the captive user base.",
+          "mechanism": "Predatory pricing + delayed monetization.",
+          "examples": ["Google Colab", "AWS Free Tier", "OpenAI API trials"],
+          "strategic_class": "Cross-subsidized capture"
+        },
+        {
+          "name": "Regulatory Arbitrage",
+          "definition": "Exploiting jurisdictional or temporal differences in regulations to gain early market advantage.",
+          "mechanism": "Operate in gray zones before compliance catches up.",
+          "examples": ["Crypto exchanges", "AI data scraping", "Gig economy classification"],
+          "strategic_class": "Temporal advantage / compliance arbitrage"
+        }
+      ]
+    },
+    "Technical": {
+      "description": "Strategies that leverage engineering, protocols, and infrastructure design to create structural dependency.",
+      "strategies": [
+        {
+          "name": "Algorithmic Opacity",
+          "definition": "Hiding algorithmic logic, model weights, or decision criteria to maintain control over outputs and distribution.",
+          "mechanism": "Information asymmetry as a power tool.",
+          "examples": ["TikTok feed ranking", "OpenAI API responses", "Google Ads auction"],
+          "strategic_class": "Information control / opacity leverage"
+        },
+        {
+          "name": "Ecosystem Envelopment",
+          "definition": "Expanding into complementary layers, converting them into controlled dependencies.",
+          "mechanism": "Vertical integration of complements.",
+          "examples": ["Microsoft GitHub→Copilot→Azure", "Apple hardware–OS–App Store loop"],
+          "strategic_class": "Platform envelopment / boundary expansion"
+        },
+        {
+          "name": "Continuous Integration Drift",
+          "definition": "Silent version drift in APIs or SDKs that breaks compatibility without explicit version changes.",
+          "mechanism": "Temporal churn as dependency pressure.",
+          "examples": ["Google Workspace APIs", "AWS SDK updates"],
+          "strategic_class": "Temporal lock-in / churn management"
+        },
+        {
+          "name": "Standard Capture",
+          "definition": "Influencing or dominating standards bodies to shape ‘open’ protocols that favor proprietary ecosystems.",
+          "mechanism": "Institutional lock-in disguised as openness.",
+          "examples": ["Chrome-driven web standards", "Apple’s Bluetooth stack"],
+          "strategic_class": "Meta-competition / rule-shaping"
+        },
+        {
+          "name": "Strategic Interoperability",
+          "definition": "Allowing partial interoperability to attract users while maintaining ultimate dependency barriers.",
+          "mechanism": "Asymmetric openness.",
+          "examples": ["iMessage with SMS fallback", "Meta cross-posting"],
+          "strategic_class": "Containment design"
+        }
+      ]
+    },
+    "Cognitive": {
+      "description": "Strategies that exploit human, social, or organizational biases to generate self-reinforcing adoption.",
+      "strategies": [
+        {
+          "name": "Ecosystem Gravity",
+          "definition": "Lock-in through identity, reputation, and social context rather than functionality.",
+          "mechanism": "Community and habit as retention levers.",
+          "examples": ["GitHub profiles", "LinkedIn endorsements", "Discord communities"],
+          "strategic_class": "Socio-technical inertia"
+        },
+        {
+          "name": "Information Asymmetry Control",
+          "definition": "Managing perception by selectively disclosing or redefining metrics, shaping external narratives.",
+          "mechanism": "Signal control to steer regulators or investors.",
+          "examples": ["‘Active user’ redefinitions", "AI benchmark cherry-picking"],
+          "strategic_class": "Perception management / narrative shaping"
+        }
+      ]
+    }
+  },
+  "meta": {
+    "summary": "These 10 strategies operate across economic, technical, and cognitive axes. Together they form the modern 'ecosystemic competition' model, where control over data, interfaces, and perception replaces direct price or product competition.",
+    "keywords": ["ecosystem strategy", "platform economics", "information asymmetry", "standard capture", "learning effects"],
+    "version": "1.0"
+  }
+}
